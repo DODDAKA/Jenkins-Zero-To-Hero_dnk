@@ -3,9 +3,12 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                sh 'echo passed'
-                // Uncomment the following line if you want to checkout from a specific Git repository
-                // git branch: 'main', url: 'https://github.com/iam-veeramalla/Jenkins-Zero-To-Hero.git'
+                // Use the credential ID for GitHub access
+                git(
+                    url: 'https://github.com/your-username/your-repo.git',
+                    credentialsId: 'Git_Access_token1', // Match the ID from Jenkins credentials
+                    branch: 'main'
+                )
             }
         }
     }
