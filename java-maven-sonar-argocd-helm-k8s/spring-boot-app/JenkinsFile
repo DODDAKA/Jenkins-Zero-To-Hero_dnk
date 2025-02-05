@@ -5,7 +5,7 @@ pipeline {
             steps {
                 // Use the credential ID for GitHub access
                 git(
-                    url: 'https://github.com/your-username/your-repo.git',
+                    url: 'https://github.com/DODDAKA/Jenkins-Zero-To-Hero_dnk.git',
                     credentialsId: 'Git_Access_token1', // Match the ID from Jenkins credentials
                     branch: 'main'
                 )
