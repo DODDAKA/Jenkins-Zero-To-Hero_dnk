@@ -26,10 +26,10 @@ pipeline {
             steps {
                 script {
                     // Navigate to the directory containing the Dockerfile and build the image
-                    sh '''
+                    sh """
                         cd java-maven-sonar-argocd-helm-k8s/spring-boot-app
                         docker build -t ${ACR_REGISTRY}/my-spring-app:${env.BUILD_ID} .
-                    '''
+                    """
                 }
             }
         }
