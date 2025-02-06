@@ -3,7 +3,7 @@ pipeline {
     environment {
         // Define ACR registry URL (replace with your ACR name)
         ACR_REGISTRY = "jenkinsacr.azurecr.io"
-         my-acr-credentials-id ='ACR_Cred'
+         my-acr-credentials-id ="ACR_Cred"
     }
     stages {
         stage('Checkout') {
