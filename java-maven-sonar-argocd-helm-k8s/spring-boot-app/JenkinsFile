@@ -4,11 +4,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Use the credential ID for GitHub access
-                git(
-                    url: 'https://github.com/DODDAKA/Jenkins-Zero-To-Hero_dnk.git',
-                    credentialsId: 'Github_Token', // Match the ID from Jenkins credentials
-                    branch: 'main'
-                )
+                sh 'echo passed"
             }
         }
     }
