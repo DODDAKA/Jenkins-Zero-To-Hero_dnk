@@ -1,5 +1,11 @@
 pipeline {
     agent any
+environment {
+        // Define ACR registry URL (replace with your ACR name)
+        ACR_REGISTRY = "jenkinsacr.azurecr.io"
+        // Jenkins credential ID for ACR credentials (stored in Jenkins)
+        ACR_CREDENTIALS = "ACR_cred"
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -15,6 +21,18 @@ pipeline {
         sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn clean install'
       }
     }
+
+stage('Build Docker Image') {
+            steps {
+                script {
+                    // Navigate to the directory containing the Dockerfile
+                    dir('java-maven-sonar-argocd-helm-k8s/spring-boot-app') {
+                        // Build the Docker image and tag it for ACR
+                        docker.build("${ACR_REGISTRY}/my-spring-app:${env.BUILD_ID}")
+                    }
+                }
+            }
+        }
 
     }
 }
