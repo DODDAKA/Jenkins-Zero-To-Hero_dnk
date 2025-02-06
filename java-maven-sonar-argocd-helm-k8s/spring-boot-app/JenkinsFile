@@ -28,7 +28,7 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'ACR_Cred', usernameVariable: 'ACR_USERNAME', passwordVariable: 'ACR_PASSWORD')]) {
                         // Login to Azure Container Registry (ACR) using credentials
                         sh """
-                            az acr login --name ${ACR_REGISTRY} --username ${ACR_USERNAME} --password ${ACR_PASSWORD}
+                            az acr login --name $ACR_REGISTRY --username $ACR_USERNAME --password $ACR_PASSWORD
                         """
                     }
                 }
