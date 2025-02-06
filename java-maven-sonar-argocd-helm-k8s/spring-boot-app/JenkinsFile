@@ -3,7 +3,7 @@ pipeline {
     environment {
         // Define ACR registry URL (replace with your ACR name)
         ACR_REGISTRY = "jenkinsacr.azurecr.io"
-         my-acr-credentials-id ="ACR_Cred"
+        ACR_CREDENTIALS = "ACR_cred"
     }
     stages {
         stage('Checkout') {
@@ -25,7 +25,7 @@ pipeline {
             steps {
                 script {
                     // Use the Jenkins credentials securely with the 'withCredentials' block
-                    withCredentials([usernamePassword(credentialsId: 'my-acr-credentials-id', usernameVariable: 'ACR_USERNAME', passwordVariable: 'ACR_PASSWORD')]) {
+                    withCredentials([usernamePassword(credentialsId: 'ACR_CREDENTIALS', usernameVariable: 'ACR_USERNAME', passwordVariable: 'ACR_PASSWORD')]) {
                         // Login to Azure Container Registry (ACR) using credentials
                         sh """
                             az acr login --name ${ACR_REGISTRY} --username ${ACR_USERNAME} --password ${ACR_PASSWORD}
