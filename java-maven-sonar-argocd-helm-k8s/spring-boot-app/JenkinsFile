@@ -4,7 +4,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Use the credential ID for GitHub access
-                sh 'echo passed"
+                sh 'echo passed'
             }
         }
     }
