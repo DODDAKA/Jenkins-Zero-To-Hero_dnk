@@ -76,9 +76,10 @@ pipeline {
                     sh """
                         az aks get-credentials --resource-group ${AKS_RESOURCE_GROUP} --name ${AKS_CLUSTER_NAME} --overwrite-existing
                     """
-
+                    sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app'
                     // Print the current working directory for debugging
                     sh 'pwd'
+
 
                     // Update the Kubernetes deployment manifest with the new image tag
                     sh """
