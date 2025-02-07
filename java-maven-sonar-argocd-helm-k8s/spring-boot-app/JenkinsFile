@@ -72,7 +72,7 @@ pipeline {
                     """
 
                     sh """
-                        az aks get-credentials --resource-group ${AKS_RESOURCE_GROUP} --name ${AKS_CLUSTER_NAME}
+                        az aks get-credentials --resource-group ${AKS_RESOURCE_GROUP} --name ${AKS_CLUSTER_NAME} --overwrite-existing
                     """
 
                     // Update the Kubernetes deployment manifest with the new image tag
