@@ -82,12 +82,12 @@ pipeline {
 
                     // Update the Kubernetes deployment manifest with the new image tag
                     sh """
-                        sed -i 's|${ACR_REGISTRY}/my-spring-app:.*|${ACR_REGISTRY}/my-spring-app:${env.BUILD_ID}|g' ../k8s/deployment.yml
+                        sed -i 's|${ACR_REGISTRY}/my-spring-app:.*|${ACR_REGISTRY}/my-spring-app:${env.BUILD_ID}|g' deployment.yml
                     """
 
                     // Apply the updated deployment manifest to the AKS cluster
                     sh """
-                        kubectl apply -f ../k8s/deployment.yml
+                        kubectl apply -f deployment.yml
                     """
                 }
             }
