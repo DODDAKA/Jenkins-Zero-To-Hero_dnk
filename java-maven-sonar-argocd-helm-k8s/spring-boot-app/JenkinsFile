@@ -69,7 +69,7 @@ pipeline {
                     // Authenticate kubectl to the AKS cluster
                     withCredentials([usernamePassword(credentialsId: 'azure-sp', usernameVariable: 'AZURE_CLIENT_ID', passwordVariable: 'AZURE_CLIENT_SECRET')]) {
                 sh '''
-                az login --service-principal --username $AZURE_CLIENT_ID --password $AZURE_CLIENT_SECRET --tenant ${TENANT_ID}
+                az login --service-principal --username $AZURE_CLIENT_ID --password $AZURE_CLIENT_SECRET --tenant "2f0b93a1-027d-4ff3-8c5e-b0eade655f77"
                 '''
                 }
 
