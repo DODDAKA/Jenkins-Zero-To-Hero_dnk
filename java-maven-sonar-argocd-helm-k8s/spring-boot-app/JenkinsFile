@@ -67,9 +67,11 @@ pipeline {
             steps {
                 script {
                     // Authenticate kubectl to the AKS cluster
-                    sh """
-                        az login --service-principal --username ${APP_ID} --password ${CLIENT_SECRET} --tenant ${TENANT_ID}
-                    """
+                    withCredentials([usernamePassword(credentialsId: 'azure-sp', usernameVariable: 'AZURE_CLIENT_ID', passwordVariable: 'AZURE_CLIENT_SECRET')]) {
+                sh '''
+                az login --service-principal --username $AZURE_CLIENT_ID --password $AZURE_CLIENT_SECRET --tenant ${TENANT_ID}
+                '''
+                }
 
                     sh """
                         az aks get-credentials --resource-group ${AKS_RESOURCE_GROUP} --name ${AKS_CLUSTER_NAME} --overwrite-existing
