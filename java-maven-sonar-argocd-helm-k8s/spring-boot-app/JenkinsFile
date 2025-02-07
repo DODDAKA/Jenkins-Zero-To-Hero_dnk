@@ -3,7 +3,9 @@ pipeline {
     environment {
         // Define ACR registry URL (replace with your ACR name)
         ACR_REGISTRY = "jenkinsacr.azurecr.io"
-        
+        // Define AKS cluster name and resource group
+        AKS_CLUSTER_NAME = "my-aks-cluster"
+        AKS_RESOURCE_GROUP = "my-resource-group"
     }
     stages {
         stage('Checkout') {
@@ -53,6 +55,27 @@ pipeline {
                     // Push the Docker image to ACR
                     sh """
                         docker push ${ACR_REGISTRY}/my-spring-app:${env.BUILD_ID}
+                    """
+                }
+            }
+        }
+
+        stage('Deploy to AKS') {
+            steps {
+                script {
+                    // Authenticate kubectl to the AKS cluster
+                    sh """
+                        az aks get-credentials --resource-group ${AKS_RESOURCE_GROUP} --name ${AKS_CLUSTER_NAME}
+                    """
+
+                    // Update the Kubernetes deployment manifest with the new image tag
+                    sh """
+                        sed -i 's|${ACR_REGISTRY}/my-spring-app:.*|${ACR_REGISTRY}/my-spring-app:${env.BUILD_ID}|g' kubernetes/deployment.yaml
+                    """
+
+                    // Apply the updated deployment manifest to the AKS cluster
+                    sh """
+                        kubectl apply -f kubernetes/deployment.yaml
                     """
                 }
             }
