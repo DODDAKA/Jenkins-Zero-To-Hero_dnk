@@ -7,3 +7,6 @@ spec:
     - ReadWriteMany
   storageClassName: azurefile-csi
   volumeName: azurefile-pv
+  resources:
+    requests:
+      storage: 5Gi
