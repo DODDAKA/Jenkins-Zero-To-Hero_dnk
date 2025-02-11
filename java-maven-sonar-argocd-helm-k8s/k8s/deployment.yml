@@ -34,6 +34,18 @@ spec:
           limits:
             memory: "1Gi"
             cpu: "500m"
+          volumeMounts:
+              - name: azure
+                mountPath: /mnt/azure
+                readOnly: false    
+      volumes:
+        - name: azure
+          csi:
+            driver: file.csi.azure.com
+            volumeAttributes:
+                secretName: azure-secret  # required
+                shareName: filesharetest  # required
+                mountOptions: 'dir_mode=0777,file_mode=0777,cache=strict,actimeo=30,nosharesock,nobrl'  # optional
 ---
 apiVersion: v1
 kind: Service
