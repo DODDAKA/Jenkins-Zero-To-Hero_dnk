@@ -16,6 +16,7 @@ spec:
     volumeHandle: "{rg-aks-pv}#{stakspvctest}#{filesharetest}"  # make sure this volumeid is unique for every identical share in the cluster
     volumeAttributes:
       shareName: filesharetest
+      server: stakspvctest.privatelink.file.core.windows.net
     nodeStageSecretRef:
       name: azure-secret
       namespace: default
