@@ -34,7 +34,7 @@ spec:
           limits:
             memory: "1Gi"
             cpu: "500m"
-          volumeMounts:
+        volumeMounts:
               - name: azure
                 mountPath: /
                 readOnly: false    
