@@ -36,7 +36,7 @@ spec:
             cpu: "500m"
         volumeMounts:
               - name: azure
-                mountPath: /mnt/logs
+                mountPath: "/mnt/logs"
                 readOnly: false    
       volumes:
         - name: azure
