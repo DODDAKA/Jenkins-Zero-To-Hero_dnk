@@ -11,5 +11,5 @@ WORKDIR /opt/app
 
 COPY ${artifact} app.jar
 
-# This should not be changed
-ENTRYPOINT ["java","-jar","app.jar"]
+# Use shell form for redirection
+ENTRYPOINT ["sh", "-c", "java -jar app.jar > /opt/app/logs/app.log 2>&1"]
