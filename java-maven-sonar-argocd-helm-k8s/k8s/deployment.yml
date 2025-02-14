@@ -26,9 +26,17 @@ spec:
           value: "prod"
         # Add these environment variables
         - name: CREATOR_1
-          value: "Team-A"  # Replace with actual value or use secret/configmap
+          #value: "Team-A"  # Replace with actual value or use secret/configmap
+          valueFrom:
+            configMapKeyRef:
+              name: creator-config          # The ConfigMap this value comes from.
+              key: first_person
         - name: CREATOR_2
-          value: "Team-B"  # Replace with actual value or use secret/configmap
+          #value: "Team-B"  # Replace with actual value or use secret/configmap
+          valueFrom:
+            configMapKeyRef:
+              name: creator-config          # The ConfigMap this value comes from.
+              key: second_person
         resources:
           requests:
             memory: "512Mi"
